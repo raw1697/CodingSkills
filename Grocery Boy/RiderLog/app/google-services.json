@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "592902662891",
+    "firebase_url": "https://grocery-boy-su.firebaseio.com",
+    "project_id": "grocery-boy-su",
+    "storage_bucket": "grocery-boy-su.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592902662891:android:706934dcc78194f7",
+        "android_client_info": {
+          "package_name": "com.co600.project.groceryboy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592902662891-nra66pb5cnh7ufngmcdmatuilg0a6ts7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.co600.project.groceryboy",
+            "certificate_hash": "a98d43e14365f56cc5ba1cf70f1e319041649cc7"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZS1SaiEUFZ8uXvNCj3uQFIVGTzCf8wDk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592902662891-p583phrdp2hshddh1tl0eeejo2nq0lho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592902662891:android:a62553d5bfd8e40b",
+        "android_client_info": {
+          "package_name": "com.example.riderlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592902662891-r7730a53lqcmk8pnno8u6gpcoem3fngn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riderlog",
+            "certificate_hash": "4a11f00802ac9b843fd92ce5ca9326cc056b71dd"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZS1SaiEUFZ8uXvNCj3uQFIVGTzCf8wDk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592902662891-p583phrdp2hshddh1tl0eeejo2nq0lho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
