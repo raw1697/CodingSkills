@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+
+<!-- /*
+Task 2.1: 
+
+1) Generate 'Get rating' buttons which have the value of the business name DONE
+2) Clicking the 'Get rating' button make a GET call to rating.php DONE
+3) Pass the name of the business that the button was clicked from (i.e. "Ala Turka")
+4) What happens if there's more than 1 result? We then need to pass the post code 
+along, and check that the post code exists in the addresses returned, that way we 
+find the specific busines that we clicked
+
+i.e. if (data.address.indexOf("POST CODE") >= 0)
+
+
+*/ -->
+    
+</script>
+</head>
+<style>
+
+h1 {
+    font-size: 40px;
+}
+
+p {
+    font-style: italic;
+	font-size: 32px;
+}
+
+table {
+    table-layout: absolute;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+.getRating {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  background: #4CAF50;
+  padding: 3px;
+  text-decoration: none;
+}
+
+.getRating:hover {
+  background: #676b57;
+  text-decoration: none;
+}
+
+.button {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 16px;
+  background: #4CAF50;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #676b57;
+  text-decoration: none;
+}
+</style>
+<body>
+<center>
+<h1>Food Hygiene Ratings</h1>
+<p>Welcome to my food hygiene webpage. Here you can find out about the hygiene ratings of restaurants in Kent...</p>
+	<div id="paginator"></div><br>
+	<table id="results">
+	<tbody>
+	  <tr>
+	  	<th>Business</th>
+		<th>Address</th>
+		<th>Date</th>
+		<th>Rating</th>
+	  </tr>
+	  </tbody>
+	</table><br><br>
+	
+
+
+	
+				
+			  <div>
+			    
+				<input type="text" id="mySearch" name="SearchBar" placeholder="Business Name..">
+				<button id="submit" type="submit" value="submit">Search</button>
+			  </div>
+			
+			
+			
+			
+			</center>
+			<script>
+$(document).ready(function(){ // document ready
+			
+	var availableTags = ["Abode Hotel","A La Turka","Age UK Canterbury","ASK Italian"];
+	/* Main function for initial page load */
+    $.get("https://www.cs.kent.ac.uk/people/staff/lb514/hygiene/hygiene.php", function(data) {
+		// converts to array 
+		var data = $.parseJSON(data);
+		console.log($.type(data));
+		
+		// gets the data from page(array) also the key and values.
+		$.each( data, function( key, value ) {
+			//var rowNum = key + 1;
+            //create table rows and cell and populate with data 
+				$('#results').append("<tr><td>" + value.business + "</td><td>" + value.address +  "</td><td>" + value.date 
+				+ "</td><td><button class='getRating' id = '" + value.postcode + "' value='" + value.business + "'> Get rating</td></tr>");
+			});
+    });
+	
+	/* Paginator */
+	$.get("https://www.cs.kent.ac.uk/people/staff/lb514/hygiene/hygiene.php?op=pages", function(data) {
+		// converts to array 
+		var data = $.parseJSON(data);
+		var buttons = "";
+		for (var i = 1; i <= data.pages; i++) {
+			buttons += "<button type='button' class='button' value='"+i+"'>"+i+"</button>";
+		}
+		document.getElementById("paginator").innerHTML = buttons; 
+    });
+	
+	$(document).on("click", ".button", function() {
+		
+		// this.value is the value of the button/function.
+		var pageNumber = this.value;
+		
+		console.log(this);
+		
+		$.get("https://www.cs.kent.ac.uk/people/staff/lb514/hygiene/hygiene.php?op=retrieve&page="+pageNumber, function(data) {
+			
+			var data = $.parseJSON(data);// converts to array 
+        
+			$('#results tr').slice(1).remove(); // Clear existing table
+			$.each( data, function( key, value ) {
+				$('#results').append("<tr><td>" + value.business + "</td><td>" + value.address +  "</td><td>" + value.date 
+				+ "</td><td><button class='getRating' id = '" + value.postcode + "' value='" + value.business + "'> Get rating</td></tr>");
+			});
+		});
+
+	});
+	
+		$(document).on("click", ".getRating", function() {
+			// var has to be declared at the top here
+			var post_code = this.id;
+            // get rating data function.
+			$.get("https://www.cs.kent.ac.uk/people/staff/lb514/hygiene/rating.php?name="+this.value, function(data) {
+				// converts to array 
+				var data = $.parseJSON(data)
+				console.log(data);
+				// if the array lenght is equal to 0 the display no ratings found(lenght 0 is an empty data array)
+				if (data.length === 0) { 
+					alert('No ratings found');
+				}
+				$.each( data , function( key, value ) {
+                    
+					
+					 var address = value.address;
+					
+					if (address.indexOf(post_code) >= 0) {
+						//console log checks 
+						console.log(value.business);
+						console.log(value.address);
+						
+						//declaring the "results" to the business data + the rating data. 
+						results = value.business + value.rating;
+						
+						//alert the results. so alret the above.
+						alert(results);
+					} 
+				});
+				
+				//console.log(this);
+			});
+		});
+		//Task 3.1 
+		
+		/* Main function for initial page load */
+       
+		// converts to array 
+		
+    $( "#mySearch" ).autocomplete({source: availableTags});
+	
+	$("#submit").click(function(){
+	
+	var text = $("#mySearch").val();
+	if (!text)
+	{
+		alert("You haven't entered a name");
+	}
+	else
+	{
+	$.get("https://www.cs.kent.ac.uk/people/staff/lb514/hygiene/hygiene.php?op=searchname&name="+text, function(data) {
+	var data = $.parseJSON(data);
+	
+			
+	$('#results tr').remove();
+	$.each( data, function( key, value ) {
+	
+					if ($.inArray(value.business, availableTags) === -1)
+					{
+						availableTags.push(value.business);
+					}
+				$('#results').append(  "<tr><td>" + value.business + "</td><td>" + value.address +  "</td><td>" + value.date 
+				+ "</td><td><button class='getRating' id = '" + value.postcode + "' value='" + value.business + "'> Get rating</td></tr>");	
+									
+			});
+					});
+					}
+					});
+				});
+</script>
+</body>
+</html>
+

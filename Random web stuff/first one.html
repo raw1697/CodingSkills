@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>My First Web Page</h2>
+<p>My First Paragraph man.</p>
+
+<p id="demo"></p>
+
+<p>Sum of numbers in array: <span id="demo1"></span></p>
+
+
+/* Question 1 */
+
+/*   
+   The rainfall array below contains the monthly rainfall (in mm) for Canterbury.
+   Write a program which calculates and prints out (using console.log) the average monthly rainfall, and 
+   the number of months where the rainfall exceeded that average.
+   
+   Rainfall data for 2000-2012 from http://www.worldweatheronline.com/canterbury-weather-averages/kent/gb.aspx
+   
+   10 marks
+*/
+	var rainfall = [48.9, 37.8, 40.0, 44.8, 73.7, 43.2, 78.7, 59.6, 38.9, 74.5, 66.0, 52.7];
+	
+
+
+
+<script>
+
+  document.getElementById("demo").innerHTML = 5 + 6;
+
+//	function say(length){
+	//document.write("Hello", + length)
+
+	//say("Bob");
+	//}
+
+//sum divided by count
+
+var rainfall = [48.9, 37.8, 40.0, 44.8, 73.7, 43.2, 78.7, 59.6, 38.9, 74.5, 66.0, 52.7];
+	
+	var count = rainfall.length; // count of array
+	var sum;
+	var text = "";
+	var i;
+	
+	//for (i = 0; i < rainfall.length; i++) {  // loop for the length of array --- count
+    //text += rainfall[i] + "<br>";
+	
+	//sum = text.sum;
+	//console.log(rainfall);
+	
+	
+	console.log(count);
+	//console.log(i);
+//}
+	console.log( rainfall);
+	
+//	document.getElementById("demo").innerHTML = text;
+
+
+function getSum(a, b) {
+
+    var e = (a + b);
+    return e;
+}
+    console.log(count);
+	console.log(getSum.toString());
+	console.log(getSum);
+	
+	 // document.write(getSum);
+    document.getElementById("demo").innerHTML = rainfall.reduce(getSum);
+    document.getElementById("demo1").innerHTML = (12 / count);
+	
+</script>
+
+
+
+</body>
+</html> 
